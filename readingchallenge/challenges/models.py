@@ -1,15 +1,15 @@
+from tkinter import CASCADE
 from django.db import models
 from django import forms
 from django.contrib.auth import get_user_model
-
-from readingchallenge import challenges
 
 # Create your models here.
 
 class Challenge(models.Model):
     title = models.CharField(max_length=200)
-    author = models.ForeignKey (
-        get_user_model(),
+    author = models.ForeignKey ( # author info will be retrieved from the user model
+        get_user_model(), 
+        on_delete=models.PROTECT # if the author user is deleted, preserve the challenge created
     )
     pitch = models.CharField(max_length=200)
     description = models.TextField(default="")
