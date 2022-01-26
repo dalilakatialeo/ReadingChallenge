@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% load static %}
+    
+{% block content%}
+
+<!-- if challenges are present, display latest challenge as hero on home page -->
+        <div id="latest-challenge">
+        {% if latest_challenge %}
+            {% for challenge in latest_challenge %}
+                {% include "./ChallengeCard.html" with challenge=challenge %} 
+            {% endfor %}
+        {% else %}
+        <!-- if no challenges are present -->
+            <p>No challenges are available.</p>
+        {% endif %}
+    </div>
+
+<!-- after the hero challenge block, display all other challenges, ordered by date created  -->
+    <div id="all-challenges">
+        {% if latest_challenges %}
+            {% for challenge in all_challenges %}
+                {% include "./ChallengeCard.html" with challenge=challenge %}
+        {% endfor %}
+        {% else %}
+        <!-- if no challenges are present -->
+            <p>No challenges are available.</p>
+        {% endif %}
+    </div>
+{% endblock %}
