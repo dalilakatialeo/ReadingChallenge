@@ -8,7 +8,7 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         '''Return all challenges.'''
-        return Challenge.objects.order_by("pub_date")
+        return Challenge.objects.order_by("date_created")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
