@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+
+<!-- base.html is repeated across the app, should not include any dynamic content -->
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Reading Challenge</title>
+        <meta name="description" content="">
+        <meta name="author" content="hackathon-team-1">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"> 
+        <!-- add bootstrap here -->
+        {% block stylesheets %}
+        <!-- insert relevant external stylesheet here -->
+        {% endblock %}
+    </head>
+
+    <body>
+        <header>
+            <!-- Reference nav.html -->
+            {% include './nav.html' %}
+        </header>
+
+        <!-- content blocks here if necessary -->
+        {% block content %}{% endblock %}
+    </body>
+</html>
