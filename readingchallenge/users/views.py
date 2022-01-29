@@ -43,7 +43,7 @@ class CustomUserDetail(APIView):
 
     # GET a single user's detail
     def get(self, request, pk):
-        if self.request.user.is_superuser:
+        if self.request.user.is_superuser or self.request.user(pk) == self.get_object(pk):
             user = self.get_object(pk)
             serializer = CustomUserSerializer(user)
             return Response(serializer.data)
