@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -43,25 +43,35 @@ class CustomUserDetail(APIView):
 
     # GET a single user's detail
     def get(self, request, pk):
-        user = self.get_object(pk)
-        serializer = CustomUserSerializer(user)
-        return Response(serializer.data)
+        if self.request.user.is_superuser:
+            user = self.get_object(pk)
+            serializer = CustomUserSerializer(user)
+            return Response(serializer.data)
+        else:
+            return HttpResponse("Unauthorized", status=401)
+
 
     #updating user details
     
     def put(self, request, pk):
-        user = self.get_object(pk)
-        serializer = CustomUserSerializer(
-            instance=user,
-            data = request.data,
-            partial=True
-        )
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
+        if self.request.user.is_superuser:
+            user = self.get_object(pk)
+            serializer = CustomUserSerializer(
+                instance=user,
+                data = request.data,
+                partial=True
+            )
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return HttpResponse("Unauthorized", status=401)
 
     def delete(self, request, pk):
-        user = self.get_object(pk)
-        user.delete()
-        # return Response (status = status.HTTP_204_NO_CONTENT)
-        return Response({'detail': 'User deleted'})
+        if self.request.user.is_superuser:
+            user = self.get_object(pk)
+            user.delete()
+            # return Response (status = status.HTTP_204_NO_CONTENT)
+            return Response({'detail': 'User deleted'})
+        else:
+            return HttpResponse("Unauthorized", status=401)
