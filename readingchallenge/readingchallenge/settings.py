@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'readingchallenge.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-     'default': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'd5h5peu4vjlolt',
         'USER': 'blnmrlovozgdcd',
