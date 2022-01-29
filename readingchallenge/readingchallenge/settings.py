@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import dj_database_url
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
 
 
 
@@ -22,12 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    'DJANGO_SECRET_KEY', 
-    'django-insecure-lme*30b1f@vjg0ux+^tg(514!i$)&%0bbhj=76dflt0p#44f5u')
+load_dotenv()
+SECRET_KEY = key=os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG') != 'False'
+DEBUG = os.getenv('DJANGO_DEBUG') != 'False'
 
 ALLOWED_HOSTS = ['*'] # * allows all hosts - dev only. CHANGE IN PRODUCTION!
 
@@ -37,11 +38,17 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Application definition
 
 INSTALLED_APPS = [
+
+    # 3rd party apps
     'rest_framework',
     'rest_framework.authtoken', #generate bearer token, lives in the header
     'corsheaders',
+
+    # local apps
     'users.apps.UsersConfig',
     'challenges.apps.ChallengesConfig',
+
+    # django inbuilt apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -137,6 +144,8 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
 
@@ -144,7 +153,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
