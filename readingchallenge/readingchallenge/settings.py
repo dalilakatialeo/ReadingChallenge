@@ -95,9 +95,13 @@ WSGI_APPLICATION = 'readingchallenge.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+     'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd5h5peu4vjlolt',
+        'USER': 'blnmrlovozgdcd',
+        'PASSWORD': '540b7bee57df5f44ad4435d9297cd6983e54a219962241bbe24a8035b69248a4',
+        'HOST': 'ec2-54-159-176-167.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
