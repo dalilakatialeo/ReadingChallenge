@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath readingchallenge readingchallenge.wsgi --log-file -
+web: gunicorn --pythonpath ReadingChallenge ReadingChallenge.wsgi --log-file -
