@@ -1,10 +1,8 @@
-from .permissions import IsOwnerOrReadOnly
 from django.http import Http404, HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 
-from readingchallenge.users.permissions import IsOwnerOrReadOnly
 from .models import CustomUser
 from .serializers import CustomUserSerializer
 from users import serializers
@@ -32,10 +30,6 @@ class CustomUserList(APIView):
         return Response(serializer.errors)
 
 # /users/<pk>
-class CustomUserDetail(APIView):
-    permission_classes = [
-        IsOwnerOrReadOnly
-    ]
     
     # helper method for getting a user and raising a 404 if that user does not exist
     def get_object(self, pk):
