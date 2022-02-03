@@ -12,9 +12,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = CustomUser(
-            username= validated_data["username"]
-            email= validated_data["email"],
-            
+            username= validated_data["username"],
+            email= validated_data["email"]
         )
         user.set_password(validated_data["password"])
         user.save()
